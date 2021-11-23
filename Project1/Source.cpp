@@ -3,7 +3,7 @@
 #include <time.h>
 
 #define   SIZE   5
-#define NUMBER_OF_UNKOWNS 4
+#define NUMBER_OF_UNKOWNS 3
 
 using namespace std;
 
@@ -37,6 +37,8 @@ void ForwardThreeLoops(float matrix[SIZE][SIZE])
 {
 	float ratio;
 	int n = NUMBER_OF_UNKOWNS;
+	int x;
+	int counter = 0;
 
 	for (int i = 1; i <= n - 1; i++)
 	{
@@ -60,7 +62,34 @@ void ForwardThreeLoops(float matrix[SIZE][SIZE])
 
 		}
 	}
-	//BackTracking(matrix);
+	//LOOP TO CHECK IF INDETERMINATE / INCOMPATIBLE
+	for (x = 1; x <= n + 1; x++)
+	{
+		if (matrix[n][x] == 0)
+		{
+			counter++;
+		}
+	}
+	//CHECK IF INDETERMINATE OR INCOMPATIBLE
+	if (counter == n)
+	{
+		cout << endl;
+		cout << "INCOMPATIBLE" << endl;
+		cout << "-----------------" << endl;
+		cout << "It is an incompatible system therefore there are no solutions" << endl;;
+		exit(0);
+	}
+	else if (counter == n + 1)
+	{
+		cout << endl;
+		cout << "INDETERMINATE" << endl;
+		cout << "-----------------" << endl;
+		cout << "There are infinite solutions therefore is an indeterminate matrix" << endl;
+		cout << "You can solve the problem using a parameter" << endl;
+		exit(0);
+	}
+	//AS THE STATEMENTS BEFORE ARE NOT COMPLETED WE CONCLUDE THAT THE SYSTEM IS NOT INDETERMINATE NEITHER INCOMPATIBLE
+	BackTracking(matrix);
 }
 
 void ForwardTwoLoops(float matrix[SIZE][SIZE])
@@ -73,7 +102,7 @@ void ForwardTwoLoops(float matrix[SIZE][SIZE])
 	int z;
 	int y = n + 1;
 	int x;
-	int counter;
+	int counter=0;
 
 		for (int i = 1; i <= n - 1; i++)
 		{
@@ -165,14 +194,13 @@ int main()
 		{
 			
 			cout << "a[" << i << "]" <<"[" << j << "]= ";
-			a[i][j]=rand() % 10+1;
-			cout <<a[i][j]<< endl;
+			cin >> a[i][j];
+			
 		}
 	}
 	
-	//ForwardThreeLoops(a);
-	ForwardTwoLoops(a);
-	//ForwardOneLoop(a);
+	ForwardThreeLoops(a);
+	//ForwardTwoLoops(a);
 
 	t2=_Query_perf_counter();
 
