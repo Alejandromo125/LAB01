@@ -72,6 +72,8 @@ void ForwardTwoLoops(float matrix[SIZE][SIZE])
 	float RowSubPivot;
 	int z;
 	int y = n + 1;
+	int x;
+	int counter;
 
 		for (int i = 1; i <= n - 1; i++)
 		{
@@ -104,7 +106,33 @@ void ForwardTwoLoops(float matrix[SIZE][SIZE])
 				
 			}
 		}
-	
+		//LOOP TO CHECK IF INDETERMINATE / INCOMPATIBLE
+		for (x = 1; x <= n + 1; x++)
+		{
+			if (matrix[n][x] == 0)
+			{
+				counter++;
+			}
+		}
+		//CHECK IF INDETERMINATE OR INCOMPATIBLE
+		if (counter == n)
+		{
+			cout << endl;
+			cout << "INCOMPATIBLE" << endl;
+			cout << "-----------------" << endl;
+			cout << "It is an incompatible system therefore there are no solutions" << endl;;
+			exit(0);
+		}
+		else if (counter == n + 1)
+		{
+			cout << endl;
+			cout << "INDETERMINATE" << endl;
+			cout << "-----------------" << endl;
+			cout << "There are infinite solutions therefore is an indeterminate matrix" << endl;
+			cout << "You can solve the problem using a parameter" << endl;
+			exit(0);
+		}
+		//AS THE STATEMENTS BEFORE ARE NOT COMPLETED WE CONCLUDE THAT THE SYSTEM IS NOT INDETERMINATE NEITHER INCOMPATIBLE
 	
 	
 		cout << "Triangulated Matrix" << endl;
@@ -117,9 +145,8 @@ void ForwardTwoLoops(float matrix[SIZE][SIZE])
 			}
 		}
 
-		//BackTracking(matrix);
-	
-	
+		BackTracking(matrix);
+
 }
 
 int main()
