@@ -7,6 +7,7 @@
 
 using namespace std;
 
+
 void BackTracking(float matrix[SIZE][SIZE])
 {
 	int n = NUMBER_OF_UNKOWNS;
@@ -53,20 +54,13 @@ void ForwardThreeLoops(float matrix[SIZE][SIZE])
 			}
 		}
 	}
-	cout << "Triangulated Matrix" << endl;
-	for (int i = 1; i <= n; i++)
-	{
-		for (int j = 1; j <= n + 1; j++)
-		{
-			cout << "matrix[" << i << "]" << "[" << j << "]= " << matrix[i][j] << endl;
-
-		}
-	}
+	
 	//LOOP TO CHECK IF INDETERMINATE / INCOMPATIBLE
 	for (x = 1; x <= n + 1; x++)
 	{
-		if (matrix[n][x] == 0)
+		if (round(matrix[n][x])==0)
 		{
+			
 			counter++;
 		}
 	}
@@ -89,6 +83,18 @@ void ForwardThreeLoops(float matrix[SIZE][SIZE])
 		exit(0);
 	}
 	//AS THE STATEMENTS BEFORE ARE NOT COMPLETED WE CONCLUDE THAT THE SYSTEM IS NOT INDETERMINATE NEITHER INCOMPATIBLE
+
+
+	cout << "Triangulated Matrix" << endl;
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n + 1; j++)
+		{
+			cout << "matrix[" << i << "]" << "[" << j << "]= " << matrix[i][j] << endl;
+
+		}
+	}
+
 	BackTracking(matrix);
 }
 
